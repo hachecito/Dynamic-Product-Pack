@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="oct_dynamic_product_pack.productPackCard">
+        <div class="oct-pack-iten-full card oe_product_cart" style="height: 200px;">
+            <div class="card-body p-1 oe_product_image">
+                <a href="#" class="d-block h-100" itemprop="url">
+                    <!--                    <t t-set="image_holder" t-value="product._get_image_holder()"/>-->
+                    <span class="d-flex h-100 justify-content-center align-items-center">
+                        <img t-att-src="'data:image/png;base64,' + product.image_1920"
+                             class="img img-fluid" style="height: 100% !important;"/>
+                    </span>
+                </a>
+            </div>
+            <div class="card-body p-0 o_wsale_product_information">
+                <div class="p-2 o_wsale_product_information_text">
+                    <h6 class="o_wsale_products_item_title mb-1">
+                        <a class="text-primary text-decoration-none"
+                           itemprop="name"
+                           t-att-content="product.name"><t t-esc="product.name"/></a>
+                    </h6>
+                </div>
+            </div>
+            <a href="#" class="btn btn-primary o_remove_from_pack o_wsale_product_btn pl-2" t-att-data-product-id="product.id"
+               t-att-data-group-id="product.oct_product_group">
+                <span class="fa fa-remove"/>
+            </a>
+        </div>
+    </t>
+</templates>

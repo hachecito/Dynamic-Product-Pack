@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="oct_product_template_published">
+            <field name="name">product.template.form.inherit.oct</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="priority">200</field>
+            <field name="arch" type="xml">
+                <xpath expr="//form//div[@name='options']" position="inside">
+                    <span class="d-inline-block">
+                        <field name="is_pack"/>
+                        <label for="is_pack"/>
+                    </span>
+                </xpath>
+                <xpath expr="//form//div[@name='options']" position="after">
+                    <label for="oct_product_group" attrs="{'invisible':[('is_pack', '=', True)]}"/>
+                    <field name="oct_product_group" attrs="{'invisible':[('is_pack', '=', True)]}"/>
+                </xpath>
+
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Pack configuration"
+                          attrs="{'invisible':['|' ,('sale_ok','=',False), ('is_pack', '=', False)]}"
+                          name="multi_website_published">
+                        <group>
+                            <group name="pack_group1_config">
+                                <label for="oct_pack_price" class="mt-1"/>
+                                <div name="pricing">
+                                    <field name="oct_pack_price" class="oe_inline" widget='monetary'
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </div>
+                                <field name="oct_link_ref" readonly="1"/>
+                            </group>
+                            <group name="pack_group2_config">
+                                <field name="oct_product_groups" widget="many2many_tags"/>
+                                <field name="oct_qty"/>
+                                <field name="oct_pack_size"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="oct_product_template_only_form_view">
+            <field name="name">product.template.only.form.inherit.oct</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="priority">200</field>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='variants']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_pack', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

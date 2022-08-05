@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="oct_product_group_form">
+            <field name="name">oct.product.group.form</field>
+            <field name="model">oct.product.group</field>
+            <field name="arch" type="xml">
+                <form string="Product Groups">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+<!--                            <group>-->
+<!--                                <field name="oct_products"/>-->
+<!--                            </group>-->
+                        </group>
+                        <label for="oct_products"/>
+                        <field name="oct_products">
+                            <tree string="Products" editable="bottom" create="false" edit="false" delete="false">
+                                <field name="sequence" widget="handle"/>
+                                <field name="name"/>
+                                <field name="is_published"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="oct_product_group_tree">
+            <field name="name">oct.product.group.tree</field>
+            <field name="model">oct.product.group</field>
+            <field name="arch" type="xml">
+                <tree string="Product Groups">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="oct_product_group_search">
+            <field name="name">oct.product.group.search</field>
+            <field name="model">oct.product.group</field>
+            <field name="arch" type="xml">
+                <search string="Product Groups">
+                    <field name="name" string="Groups"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="oct_product_group_action">
+            <field name="name">Product Groups</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">oct.product.group</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="oct_product_group_search"/>
+        </record>
+
+        <menuitem id="oct_product_group_menu" parent="stock.menu_product_in_config_stock"
+                  action="oct_dynamic_product_pack.oct_product_group_action"
+                  sequence="150" groups="base.group_no_one"/>
+    </data>
+</odoo>
